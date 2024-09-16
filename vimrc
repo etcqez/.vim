@@ -3,8 +3,8 @@ set ttimeoutlen=100
 set display=truncate
 try
   set clipboard=unnamed
+  colorscheme habamax
 catch
-cnoremap <Esc> <Nop>
 endtry
 set number
 set ruler
@@ -57,6 +57,7 @@ call plug#begin()
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'mileszs/ack.vim'
+  Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
@@ -74,3 +75,6 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 nnoremap FF :Ack!<Space>
+
+" easymotion
+nnoremap s <Plug>(easymotion-s2)
