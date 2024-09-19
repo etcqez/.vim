@@ -36,14 +36,16 @@ noremap <C-Enter> o
 inoremap <C-M> <Esc>o
 noremap <C-M> o
 inoremap <C-v> <Esc>o<Esc>p
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-a> <Home>
+inoremap <C-e> <end>
+
 
 " 清除每行最后多余的空白
 autocmd BufWritePre * :%s/\s\+$//e
-
-"记住上次编辑和浏览的位置
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
 
 " 插件
 call plug#begin()
@@ -78,3 +80,37 @@ nnoremap FF :Ack!<Space>
 
 " easymotion
 nnoremap s <Plug>(easymotion-s2)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * silent! checktime
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" Turn on the Wild menu
+set wildmenu
+
+" Height of the command bar
+set cmdheight=1
+
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+map 0 ^
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
