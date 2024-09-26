@@ -1,8 +1,10 @@
+" C-w c kill window
+" C-w C-o kill other window
 set ttimeout
 set ttimeoutlen=100
 set display=truncate
 try
-  set clipboard=unnamed
+  set clipboard=unnamedplus
   colorscheme habamax
 catch
 endtry
@@ -27,22 +29,25 @@ set incsearch
 set smartcase
 syntax on
 filetype indent plugin on
-let mapleader=" "
-noremap <leader>s :w<Enter>
-inoremap <C-s> <Esc>:w<Enter>
+"inoremap <C-s> <Esc>:w<Enter>
+inoremap <C-s> <C-a>
 noremap <C-s> :w<Enter>
 inoremap <C-Enter> <Esc>o
-noremap <C-Enter> o
-inoremap <C-M> <Esc>o
-noremap <C-M> o
 inoremap <C-v> <Esc>o<Esc>p
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
-inoremap <C-a> <Home>
-inoremap <C-e> <end>
+inoremap <C-a> <Esc>I
+inoremap <C-e> <End>
+noremap <Tab> >>
+vnoremap <Tab> >
+inoremap <C-t> <Esc>hxpa
+inoremap <C-y> <Esc>p
+noremap <C-e> <C-x>
 
+let mapleader=" "
+noremap <leader>s :set nohlsearch<Enter>
 
 " 清除每行最后多余的空白
 autocmd BufWritePre * :%s/\s\+$//e
@@ -56,10 +61,13 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  Plug 'SirVer/ultisnips'
+"  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'mileszs/ack.vim'
   Plug 'easymotion/vim-easymotion'
+  Plug 'tpope/vim-commentary'
+  Plug 'mbbill/undotree'
+
 
 call plug#end()
 
@@ -80,6 +88,11 @@ nnoremap FF :Ack!<Space>
 
 " easymotion
 nnoremap s <Plug>(easymotion-s2)
+
+" undotree
+nnoremap <F5> :UndotreeToggle<CR>
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set to auto read when a file is changed from the outside
@@ -114,3 +127,20 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+
+if stridx(&runtimepath, expand(vimDir)) == -1
+  " vimDir is not on runtimepath, add it
+  let &runtimepath.=','.vimDir
+endif
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
