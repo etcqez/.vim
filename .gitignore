@@ -1,5 +1,5 @@
 *
 !.gitignore
 !vimrc
-!autoload/
+!autoload/plug.vim
 
