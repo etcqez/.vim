@@ -5,7 +5,7 @@ set ttimeout
 set ttimeoutlen=100
 set display=truncate
 try
-  set clipboard=unnamedplus
+  set clipboard=unnamed
   colorscheme habamax
 catch
 endtry
