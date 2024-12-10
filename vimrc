@@ -58,18 +58,18 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " 插件
 call plug#begin()
-  Plug 'vim-airline/vim-airline'
-  Plug 'preservim/nerdtree'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-repeat'
+Plug 'vim-airline/vim-airline'
+Plug 'preservim/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 "  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'mileszs/ack.vim'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'tpope/vim-commentary'
-  Plug 'mbbill/undotree'
+Plug 'honza/vim-snippets'
+Plug 'mileszs/ack.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
+Plug 'mbbill/undotree'
 call plug#end()
 
 " airline
@@ -138,10 +138,10 @@ endif
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    let myUndoDir = expand(vimDir . '/undodir')
-    " Create dirs
-    call system('mkdir ' . vimDir)
-    call system('mkdir ' . myUndoDir)
-    let &undodir = myUndoDir
-    set undofile
+  let myUndoDir = expand(vimDir . '/undodir')
+  " Create dirs
+  call system('mkdir ' . vimDir)
+  call system('mkdir ' . myUndoDir)
+  let &undodir = myUndoDir
+  set undofile
 endif
