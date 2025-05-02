@@ -42,10 +42,6 @@ inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-a> <Esc>I
 inoremap <C-e> <End>
-noremap <Tab> >>
-vnoremap <Tab> >
-noremap <S-Tab> <<
-vnoremap <S-Tab> <
 inoremap <C-t> <Esc>hxpa
 inoremap <C-y> <Esc>p
 noremap <C-e> <C-x>
